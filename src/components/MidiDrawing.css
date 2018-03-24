@@ -1,0 +1,21 @@
+@keyframes spinAround {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(359deg); } }
+
+.midi-drawing {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  cursor: pointer; }
+
+.midi-drawing-item {
+  background: rgba(0, 209, 178, 0.5);
+  position: absolute;
+  height: 100%; }
+  .midi-drawing-item.erase {
+    background: rgba(255, 56, 96, 0.5); }

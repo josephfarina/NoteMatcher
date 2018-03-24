@@ -1,0 +1,49 @@
+@keyframes spinAround {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(359deg); } }
+
+.time-slider {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: #363636;
+  border-top: 1px solid white;
+  overflow: hidden;
+  border-bottom: 1px solid #363636; }
+
+.time-slider-dragger {
+  font-weight: bold;
+  color: white;
+  background: rgba(32, 156, 238, 0.85);
+  border: 3px solid #209cee;
+  box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2); }
+
+.time-slider-dragger-handle {
+  position: relative;
+  background: #209cee;
+  border: 1px solid white;
+  width: 35px !important;
+  margin-top: -3px;
+  height: calc(100% + 6px) !important; }
+  .time-slider-dragger-handle:after {
+    content: " ";
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    width: 5px;
+    right: 3px;
+    border-radius: 20px;
+    transform: translateX(-50%);
+    background: #bce1fa; }
+
+.time-slider-beat {
+  position: absolute;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.25);
+  top: 0;
+  bottom: 0; }
+  .time-slider-beat.wide {
+    background: white;
+    width: 2px; }

@@ -1,0 +1,64 @@
+// @import "bulma/bulma.sass";
+@import "bulma/sass/utilities/_all.sass";
+@import "bulma/sass/base/_all.sass";
+@import "bulma/sass/elements/_all.sass";
+@import "bulma/sass/components/_all.sass";
+@import "bulma-extensions/bulma-slider/bulma-slider.sass";
+@import "bulma-extensions/bulma-quickview/bulma-quickview.sass";
+
+$joyride-header-font-size: 1.2rem;
+$joyride-color: $yellow;
+$joyride-tooltip-color: $dark;
+$joyride-button-color: $dark;
+$joyride-button-border-radius: 2px;
+$joyride-back-button-color: $dark;
+
+@import 'react-joyride/lib/react-joyride';
+
+.clickable {
+  cursor: pointer;
+}
+
+@include mobile() {
+  .button {
+    @include button-medium();
+  }
+}
+
+// monkey patch bulma-quickview
+.quickview {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow-y: auto;
+  @include overflow-touch();
+
+  .quickview-header {
+    font-weight: bold;
+  }
+
+  .quickview-item {
+    padding: 0.375rem 1rem;
+
+    .button {
+      width: 100%;
+    }
+
+    select,
+    .select {
+      width: 100%;
+    }
+
+    & > strong {
+      display: block;
+      margin-bottom: 1rem;
+    }
+  }
+
+  hr.divider {
+    border-bottom: 1px solid $light;
+    margin: .25rem;
+  }
+}
+

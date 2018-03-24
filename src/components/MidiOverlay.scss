@@ -1,0 +1,54 @@
+@import 'colors.scss';
+
+.midi-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.midi-item { 
+  font-weight: bold;
+  color: $white;
+  background: transparentize($cyan, .75);
+  border: 3px solid $cyan;
+  box-shadow: 1px 1px 2px 2px rgba(0,0,0,.2);
+}
+
+.midi-item-content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  color: $dark;
+
+  &:hover span:last-child {
+    display: flex;
+  }
+
+  > span:first-child {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+.midi-item-drag-handle {
+  position: relative;
+  background: $cyan;
+  width: 20px !important;
+
+  &:after {
+    content: " ";
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    width: 5px;
+    right: 3px;
+    border-radius: 20px;
+    transform: translateX(-50%);
+    background: mix($white, $cyan, 70);
+  }
+}

@@ -1,0 +1,24 @@
+@import 'colors.scss';
+$panel-item-border: 1px solid #dbdbdb;
+
+.midi-generator-item-container {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: -1px;
+  border-bottom: $panel-item-border;
+  @include overflow-touch();
+
+  .panel-block:last-child {
+    border-bottom: none;
+  }
+}
+
+a.panel-block.midi-generator-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.midi-generator-item-note {
+  display: flex;
+  align-items: center;
+}

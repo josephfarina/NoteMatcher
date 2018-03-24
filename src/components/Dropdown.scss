@@ -1,0 +1,34 @@
+@import 'colors.scss';
+
+// make dropdown more mobile friendly
+.dropdown-content {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.dropdown--full-screen {
+  width: 90vw;
+}
+
+.dropdown--full-screen-up {
+  @include mobile() {
+    position: fixed !important;
+    bottom: 60px !important;
+    left: 5vw !important;
+    width: 90vw !important;
+  }
+}
+
+.dropdown--half-screen {
+  width: 50vw;
+
+  @include mobile() {
+    width: 75vw;
+  }
+}
+
+.dropdown-item {
+  .select { width: 100%; }
+  select { width: 100%; }
+}
+

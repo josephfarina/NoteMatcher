@@ -1,0 +1,25 @@
+@import 'colors.scss';
+@import 'bulma.scss';
+
+$height: 75px;
+
+.quickview-header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: $height;
+  background: $white;
+}
+
+.quickview-body {
+  position: fixed;
+  top: $height;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  // max-height: calc(100vh - #{$height});
+  overflow-y: auto;
+  @include overflow-touch();
+}
+

@@ -1,0 +1,12 @@
+@import 'colors.scss';
+
+.onboarding-step {
+  max-height: 35vh;
+  overflow-y: auto;
+}
+
+.onboarding-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

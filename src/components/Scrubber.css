@@ -1,0 +1,16 @@
+@keyframes spinAround {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(359deg); } }
+
+.scrubber {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  min-height: 100vh;
+  width: 3px;
+  background: #ffdd57;
+  cursor: pointer;
+  z-index: 2; }

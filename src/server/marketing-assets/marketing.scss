@@ -1,0 +1,95 @@
+@import "bulma/sass/utilities/_all.sass";
+@import "bulma/sass/base/_all.sass";
+@import "bulma/sass/layout/_all.sass";
+@import "bulma/sass/grid/columns.sass";
+@import "bulma/sass/elements/title.sass";
+@import "bulma/sass/elements/button.sass";
+@import "bulma/sass/components/navbar.sass";
+@import "bulma/sass/components/tabs.sass";
+
+@import 'styles/devices.scss';
+@import 'styles/mock-site.scss';
+
+p { margin-bottom: .5rem; }
+
+.is-purple {
+  background: linear-gradient(
+    180deg,
+    $purple 0%,
+    $cyan 250%
+  );
+
+  h1, h2, h3, h4, h5, div, strong, span, em, p { color: $white; }
+}
+
+.button.is-purple {
+  background: $purple;
+}
+
+.is-yellow {
+  background: linear-gradient(
+    180deg,
+    $yellow 0%,
+    $orange 250%
+  );
+
+  h1, h2, h3, h4, h5, div, strong, span, em, p { color: $white; }
+}
+
+.is-blue {
+  background: linear-gradient(
+    180deg,
+    $cyan 0%,
+    $blue 250%
+  );
+
+  h1, h2, h3, h4, h5, div, strong, span, em, p { color: $white; }
+}
+
+section.hero {
+  .title,
+  .subtitle {
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &:first-child {
+    .hero-body {
+      margin-top: -2rem;
+    }
+  }
+}
+
+.laptop-container {
+  display: flex;
+  justify-content: space-between;;
+  align-items: center;
+  max-width: 900px;
+  margin: auto;
+
+  @include mobile() {
+    justify-content: center;
+
+    .laptop {
+      display: none;
+    }
+  }
+
+  @include tablet() {
+    $translation: 50px;
+
+    & > *:first-child {
+      transform: translateX($translation);
+    }
+
+    & > *:last-child {
+      transform: translateX(-$translation);
+    }
+  }
+}
+
+#nav.navbar {
+  display: flex;
+  justify-content: space-between;
+}

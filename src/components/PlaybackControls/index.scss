@@ -1,0 +1,24 @@
+@import 'colors.scss';
+
+.playback-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: $yellow;
+  width: 100%;
+  padding: 0 1rem;
+
+  .field.has-addons {
+    margin-bottom: 0 !important; // bulma override
+  }
+
+  .icon {
+    color: $white;
+  }
+
+  margin-bottom: 0 !important;
+}
+
+.playback-controls--center-buttons {
+  justify-content: center;
+}

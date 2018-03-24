@@ -1,0 +1,31 @@
+@keyframes spinAround {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(359deg); } }
+
+.dropdown-content {
+  max-height: 60vh;
+  overflow-y: auto; }
+
+.dropdown--full-screen {
+  width: 90vw; }
+
+@media screen and (max-width: 768px) {
+  .dropdown--full-screen-up {
+    position: fixed !important;
+    bottom: 60px !important;
+    left: 5vw !important;
+    width: 90vw !important; } }
+
+.dropdown--half-screen {
+  width: 50vw; }
+  @media screen and (max-width: 768px) {
+    .dropdown--half-screen {
+      width: 75vw; } }
+
+.dropdown-item .select {
+  width: 100%; }
+
+.dropdown-item select {
+  width: 100%; }

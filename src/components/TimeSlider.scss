@@ -1,0 +1,56 @@
+@import 'colors.scss';
+
+.time-slider {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: $dark;
+  border-top: 1px solid $white;
+  overflow: hidden;
+  border-bottom: 1px solid $dark;
+}
+
+.time-slider-dragger {
+  font-weight: bold;
+  color: $white;
+  background: transparentize($cyan, .15);
+  border: 3px solid $cyan;
+  box-shadow: 1px 1px 2px 2px rgba(0,0,0,.2);
+}
+
+.time-slider-dragger-handle {
+  position: relative;
+  background: $cyan;
+  border: 1px solid $white;
+  width: 35px !important;
+
+  // hack to get it to take up the entire height including border
+  margin-top: -3px;
+  height: calc(100% + 6px) !important;
+
+  &:after {
+    content: " ";
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    width: 5px;
+    right: 3px;
+    border-radius: 20px;
+    transform: translateX(-50%);
+    background: mix($white, $cyan, 70);
+  }
+}
+
+.time-slider-beat {
+  position: absolute;
+  width: 1px;
+  background: transparentize($white, .75);
+  top: 0;
+  bottom: 0;
+
+  &.wide { 
+  background: $white;
+  width: 2px; 
+}
+}
+

@@ -1,0 +1,13 @@
+@keyframes spinAround {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(359deg); } }
+
+.beat-marker {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: rgba(54, 54, 54, 0.8);
+  pointer-events: none;
+  user-select: none; }

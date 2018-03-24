@@ -1,0 +1,21 @@
+@keyframes spinAround {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(359deg); } }
+
+.playback-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffdd57;
+  width: 100%;
+  padding: 0 1rem;
+  margin-bottom: 0 !important; }
+  .playback-controls .field.has-addons {
+    margin-bottom: 0 !important; }
+  .playback-controls .icon {
+    color: white; }
+
+.playback-controls--center-buttons {
+  justify-content: center; }

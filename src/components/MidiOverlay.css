@@ -1,0 +1,48 @@
+@keyframes spinAround {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(359deg); } }
+
+.midi-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; }
+
+.midi-item {
+  font-weight: bold;
+  color: white;
+  background: rgba(32, 156, 238, 0.25);
+  border: 3px solid #209cee;
+  box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2); }
+
+.midi-item-content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  color: #363636; }
+  .midi-item-content:hover span:last-child {
+    display: flex; }
+  .midi-item-content > span:first-child {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center; }
+
+.midi-item-drag-handle {
+  position: relative;
+  background: #209cee;
+  width: 20px !important; }
+  .midi-item-drag-handle:after {
+    content: " ";
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    width: 5px;
+    right: 3px;
+    border-radius: 20px;
+    transform: translateX(-50%);
+    background: #bce1fa; }

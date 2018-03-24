@@ -1,0 +1,22 @@
+@import 'colors.scss';
+
+.midi-drawing {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.midi-drawing-item {
+  background: transparentize($primary, .5);
+  position: absolute;
+  height: 100%;
+
+  &.erase {
+    background: transparentize($red, .5);
+  }
+}
+
