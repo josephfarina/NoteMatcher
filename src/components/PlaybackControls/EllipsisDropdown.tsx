@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react';
 //import { connect } from "react-redux";
 //import cn from "classnames";
-import { Dropdown } from "../";
-import { makeButton } from "./util";
-import { CopyShareLink } from "./Sharing";
+import { Dropdown } from '../';
+import { makeButton } from './util';
+import { CopyShareLink } from './Sharing';
 import Faq from './FAQ';
 import EmailUsButton from './EmailUsButton';
 
@@ -18,8 +18,8 @@ export default class EllipsisDropdown extends React.Component<Props, {}> {
         fullScreen
         right
         button={makeButton({
-          icon: "ellipsis-v",
-          id: "share-or-ellipsis-button"
+          icon: 'ellipsis-v',
+          id: 'share-or-ellipsis-button'
           //className: "is-hidden-tablet"
         })}
         content={

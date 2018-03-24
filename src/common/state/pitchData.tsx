@@ -1,10 +1,10 @@
-import { createReducer } from ".";
-import notes from "./../pitch/notes";
+import { createReducer } from '.';
+import notes from './../pitch/notes';
 
 const initialState: StatePitchData = {};
 
-const UPDATE_DATA = "pitchdata::update_data";
-const CLEAR_STATE = "pitchdata::clear_state";
+const UPDATE_DATA = 'pitchdata::update_data';
+const CLEAR_STATE = 'pitchdata::clear_state';
 
 const DEFAULT_NO_VALUE_ARRAY: any[] = [];
 

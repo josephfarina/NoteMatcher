@@ -1,10 +1,11 @@
-import * as React from "react";
-import { audioControl } from "./../common/state";
-import { connect } from "react-redux";
-import Joyride, { Step } from "react-joyride";
-import "./Onboarding.css";
+import * as React from 'react';
+import Joyride, { Step } from 'react-joyride';
+import { audioControl } from './../common/state';
+import { connect } from 'react-redux';
 
-const STORAGE_HAS_RAN_ONBOARDING = "note__matcher__onboarding";
+import './Onboarding.css';
+
+const STORAGE_HAS_RAN_ONBOARDING = 'note__matcher__onboarding';
 
 interface Props {
   gotPermissionForAudio: boolean;
@@ -12,58 +13,59 @@ interface Props {
 
 const GIVE_PERMISION: Step = {
   title: "Let's Get Started!",
-  selector: "#ask-for-permission-button",
+  selector: '#ask-for-permission-button',
   text: (
     <div className="content">
       <p>
         Before we can move on we need to get permission to access your
-        microphone. 
-    Please click{" "} the highlighted button
+        microphone. Please click the highlighted button
         <button className="button is-small">
           <span className="icon">
             <i className="fa fa-microphone" />
           </span>
           <span>Give Microphone Access</span>
-        </button>{" "}
+        </button>{' '}
         to get started.
       </p>
 
-      <p>Your privacy is our top concern. We only analyze your voice locally. It never leaves your device.</p>
+      <p>
+        Your privacy is our top concern. We only analyze your voice locally. It
+        never leaves your device.
+      </p>
     </div>
   ),
   isFixed: true,
   allowClicksThruHole: true,
   style: {
-    footer: { display: "none" }
+    footer: { display: 'none' }
   }
 };
 
 const PLAY_MODE: Step = {
-  title: "Begin and Stop Analyzer",
+  title: 'Begin and Stop Analyzer',
   text: (
     <div className="content onboarding-step">
       <p>
-        Hit{" "}
+        Hit{' '}
         <button className="button is-small">
           <i className="fa fa-circle has-text-danger" />
-        </button>{" "}
-        to begin analyzing your voice. 
-        This will start the MIDI playback
-        and voice graphing.
+        </button>{' '}
+        to begin analyzing your voice. This will start the MIDI playback and
+        voice graphing.
       </p>
       <p>
-        If you don't immediately see your voice being graphed 
-        try finding it by scrolling up or down. 
+        If you don't immediately see your voice being graphed try finding it by
+        scrolling up or down.
       </p>
     </div>
   ),
   isFixed: true,
-  selector: "#play-pause-button",
-  style: { back: { display: "none" } }
+  selector: '#play-pause-button',
+  style: { back: { display: 'none' } }
 };
 
 const EDIT_MODE: Step = {
-  title: "MIDI Editing Tools",
+  title: 'MIDI Editing Tools',
   text: (
     <div className="content onboarding-step">
       <p>
@@ -101,8 +103,8 @@ const EDIT_MODE: Step = {
         </div>
 
         <p>
-        Click and drag anywhere to erase all notes that overlap 
-        with the duration you draw.
+          Click and drag anywhere to erase all notes that overlap with the
+          duration you draw.
         </p>
       </div>
 
@@ -120,33 +122,33 @@ const EDIT_MODE: Step = {
     </div>
   ),
   isFixed: true,
-  selector: "#editing-options-button-bar"
+  selector: '#editing-options-button-bar'
 };
 
 const PREBUILT_SCALE: Step = {
-  title: "Prebuilt Scales",
+  title: 'Prebuilt Scales',
   text: (
     <div className="content onboarding-step">
       <p>
         If you want to practice some scales without having to manually draw them
-        in you are in luck. You can select a variety of scales and have them automatically
-        drawn in for you here.
+        in you are in luck. You can select a variety of scales and have them
+        automatically drawn in for you here.
       </p>
     </div>
   ),
   isFixed: true,
-  selector: "#midi-generator-button"
+  selector: '#midi-generator-button'
 };
 
 const SETTINGS: Step = {
-  title: "Settings",
+  title: 'Settings',
   text: (
     <div className="content onboarding-step">
       <p>
-        The settings panel allows you to control various things. 
-        Think of it as a place to manage your playback preferences.
-        You can change things like the:
-    </p>
+        The settings panel allows you to control various things. Think of it as
+        a place to manage your playback preferences. You can change things like
+        the:
+      </p>
       <ul>
         <li>Metronome</li>
         <li>Tempo</li>
@@ -157,11 +159,11 @@ const SETTINGS: Step = {
     </div>
   ),
   isFixed: true,
-  selector: "#quick-view-button"
+  selector: '#quick-view-button'
 };
 
 const SHARE: Step = {
-  title: "Share and Save",
+  title: 'Share and Save',
   text: (
     <div className="content onboarding-step">
       <p>
@@ -169,48 +171,45 @@ const SHARE: Step = {
         project. Copy and send it to anyone to share your exact project.
       </p>
       <p>
-        The URL in your browser is also updated when ever you make any changes to reflect this share link.
-        This allows you to be able to refresh the page without losing any work!
+        The URL in your browser is also updated when ever you make any changes
+        to reflect this share link. This allows you to be able to refresh the
+        page without losing any work!
       </p>
     </div>
   ),
   isFixed: true,
-  selector: "#share-or-ellipsis-button"
+  selector: '#share-or-ellipsis-button'
 };
 
 const TIMESLIDER: Step = {
-  title: "Navigate Through Time",
+  title: 'Navigate Through Time',
   text: (
     <div className="content onboarding-step">
+      <p>Click and drag the handle to zoom the X axis.</p>
       <p>
-        Click and drag the handle to zoom the X axis.
-      </p>
-      <p>
-        The markings coordinate with the total beats in your project.
-        So, in order to only see 4 beats then drag 
-        the handle to the 4th mark from the left
-        etc.
+        The markings coordinate with the total beats in your project. So, in
+        order to only see 4 beats then drag the handle to the 4th mark from the
+        left etc.
       </p>
     </div>
   ),
   isFixed: true,
-  selector: "#timeslider"
+  selector: '#timeslider'
 };
 
 const HELP: Step = {
-  title: "Support and Feedback",
+  title: 'Support and Feedback',
   text: (
     <div className="content onboarding-step">
       <p>
-        Here you can find some FAQs and answers. 
-        Hopefully they help, but if you have any other issues
-        please email us and we will
-        be more than happy to help. You can find our email in this dropdown.
+        Here you can find some FAQs and answers. Hopefully they help, but if you
+        have any other issues please email us and we will be more than happy to
+        help. You can find our email in this dropdown.
       </p>
     </div>
   ),
   isFixed: true,
-  selector: "#help-button"
+  selector: '#help-button'
 };
 
 const STEPS: Step[] = [
@@ -221,14 +220,11 @@ const STEPS: Step[] = [
   PREBUILT_SCALE,
   SETTINGS,
   SHARE,
-  HELP // TODO: make this work on mobile too
+  HELP 
 ];
 
-
-// TODO: add last step that says you are ready now! Hit record and sing
-
 class Onboarding extends React.Component<Props, {}> {
-  private joyride: Joyride | null;
+  private joyride: Joyride | null = null;
 
   componentWillReceiveProps(nextProps: Props) {
     if (
@@ -249,7 +245,7 @@ class Onboarding extends React.Component<Props, {}> {
         type="continuous"
         steps={STEPS}
         callback={({ type }) => {
-          if (type === "finished") {
+          if (type === 'finished') {
             onboardingComplete();
           }
         }}
@@ -271,5 +267,5 @@ function shouldRunOnboarding() {
 }
 
 function onboardingComplete() {
-  localStorage.setItem(STORAGE_HAS_RAN_ONBOARDING, "true");
+  localStorage.setItem(STORAGE_HAS_RAN_ONBOARDING, 'true');
 }

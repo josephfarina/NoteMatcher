@@ -1,4 +1,4 @@
-import notes, { INDEX_MAP_BY_NOTE } from "../pitch/notes";
+import notes, { INDEX_MAP_BY_NOTE } from '../pitch/notes';
 
 enum Step {
   half = 1,
@@ -12,7 +12,7 @@ function generateScale(note: Note, steps: Step[]): (Note | undefined)[] {
     lastNoteIndex -= step;
     const nextNote = notes[lastNoteIndex];
 
-    if (typeof nextNote === "undefined") {
+    if (typeof nextNote === 'undefined') {
       scale.push(undefined);
     } else {
       scale.push(notes[lastNoteIndex].note);
@@ -55,8 +55,8 @@ export function buildMidiFromScale(
   }
 ): MidiNote[] {
   const { beatsPerNote } = options;
-  return scale.reduce((acc, note) => {
-    if (typeof note !== "undefined") {
+  return scale.reduce((acc: MidiNote[], note) => {
+    if (typeof note !== 'undefined') {
       const nextNote: MidiNote = [note, beatsPerNote];
       const undefineds = [];
       for (let i = 1; i < beatsPerNote; i++) undefineds.push(undefined);

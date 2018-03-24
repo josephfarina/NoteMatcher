@@ -1,12 +1,12 @@
-import * as React from "react";
-import { connect } from "react-redux";
+import * as React from 'react';
+import { connect } from 'react-redux';
 
 //import { ANALYZER_LEFT_COL_WIDTH } from "./../constants";
-import notes from "./../common/pitch/notes";
-import { pitchData, audioControl } from "./../common/state";
-import { NoteCanvas, MidiDrawing } from ".";
+import notes from './../common/pitch/notes';
+import { pitchData, audioControl } from './../common/state';
+import { NoteCanvas, MidiDrawing } from '.';
 
-import "./NoteGraph.css";
+import './NoteGraph.css';
 
 interface Props {
   width: number;

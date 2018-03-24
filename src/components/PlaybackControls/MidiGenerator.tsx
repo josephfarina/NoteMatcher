@@ -1,29 +1,29 @@
-import * as React from "react";
-import notes from "./../../common/pitch/notes";
-import * as MusicMath from "./../../common/musicMath";
-import { audioControl } from "./../../common/state";
-import { connect } from "react-redux";
-import cn from "classnames";
-import { Dropdown } from "../";
-import { makeButton } from "./util";
-import "./MidiGenerator.css";
-const Fuse = require("fuse.js");
+import * as React from 'react';
+import notes from './../../common/pitch/notes';
+import * as MusicMath from './../../common/musicMath';
+import { audioControl } from './../../common/state';
+import { connect } from 'react-redux';
+import cn from 'classnames';
+import { Dropdown } from '../';
+import { makeButton } from './util';
+import './MidiGenerator.css';
+const Fuse = require('fuse.js');
 
 interface MidiGeneratorState {
   search: string;
   tab: ScaleType;
 }
 
-type ScaleType = "Major" | "Minor" | "all";
+type ScaleType = 'Major' | 'Minor' | 'all';
 
 const MidiGenerator = connect(
   () => ({}),
   dispatch => ({
     generateScale(note: Note, scaleType: ScaleType) {
       let scale: (Note | undefined)[];
-      if (scaleType === "Major") {
+      if (scaleType === 'Major') {
         scale = MusicMath.getMajorScale(note);
-      } else if (scaleType === "Minor") {
+      } else if (scaleType === 'Minor') {
         scale = MusicMath.getMinorScale(note);
       } else {
         return;
@@ -43,28 +43,31 @@ const MidiGenerator = connect(
     },
     MidiGeneratorState
   > {
-    state: MidiGeneratorState = { search: "", tab: "all" };
+    state: MidiGeneratorState = { search: '', tab: 'all' };
 
     render() {
       const { generateScale } = this.props;
       let currNotes: {
         note: Note;
         scale: ScaleType;
-      }[] = notes.reduce((acc, { note }) => {
-        let scales: ScaleType[] = [this.state.tab];
+      }[] = notes.reduce(
+        (acc: { note: Note; scale: ScaleType }[], { note }) => {
+          let scales: ScaleType[] = [this.state.tab];
 
-        if (this.state.tab === "all") {
-          scales = ["Major", "Minor"];
-        }
+          if (this.state.tab === 'all') {
+            scales = ['Major', 'Minor'];
+          }
 
-        return [...acc, ...scales.map(scale => ({ scale, note }))];
-      }, []);
+          return [...acc, ...scales.map(scale => ({ scale, note }))];
+        },
+        []
+      );
 
       currNotes = [...currNotes].reverse();
 
       if (this.state.search.length > 0) {
         currNotes = new Fuse(currNotes, {
-          keys: ["note"],
+          keys: ['note'],
           tokenize: true,
           threshold: 0.6
         }).search(this.state.search);
@@ -91,20 +94,20 @@ const MidiGenerator = connect(
 
           <p className="panel-tabs">
             <a
-              onClick={() => this.setState({ tab: "all" })}
-              className={cn({ "is-active": this.state.tab === "all" })}
+              onClick={() => this.setState({ tab: 'all' })}
+              className={cn({ 'is-active': this.state.tab === 'all' })}
             >
               All
             </a>
             <a
-              onClick={() => this.setState({ tab: "Major" })}
-              className={cn({ "is-active": this.state.tab === "Major" })}
+              onClick={() => this.setState({ tab: 'Major' })}
+              className={cn({ 'is-active': this.state.tab === 'Major' })}
             >
               Major Scale
             </a>
             <a
-              onClick={() => this.setState({ tab: "Minor" })}
-              className={cn({ "is-active": this.state.tab === "Minor" })}
+              onClick={() => this.setState({ tab: 'Minor' })}
+              className={cn({ 'is-active': this.state.tab === 'Minor' })}
             >
               Minor Scale
             </a>
@@ -149,9 +152,9 @@ function PanelItem({
         {note}
       </div>
       <span
-        className={cn("tag", {
-          "is-dark": scale === "Minor",
-          "is-light": scale === "Major"
+        className={cn('tag', {
+          'is-dark': scale === 'Minor',
+          'is-light': scale === 'Major'
         })}
       >
         {scale}
@@ -163,7 +166,7 @@ function PanelItem({
 export { MidiGenerator };
 
 export class MidiGeneratorDropdown extends React.Component<{}, {}> {
-  private dropdown: Dropdown | null;
+  private dropdown: Dropdown | null = null;
 
   render() {
     return (
@@ -174,9 +177,9 @@ export class MidiGeneratorDropdown extends React.Component<{}, {}> {
         clickable
         fullScreenUpMobile
         button={makeButton({
-          icon: "music",
-          id: "midi-generator-button",
-          tooltip: "Prebuilt scales and melodies that you can load instantly"
+          icon: 'music',
+          id: 'midi-generator-button',
+          tooltip: 'Prebuilt scales and melodies that you can load instantly'
         })}
         content={
           <div className="dropdown-item">

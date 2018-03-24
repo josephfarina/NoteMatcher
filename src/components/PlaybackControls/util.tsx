@@ -1,14 +1,14 @@
-import * as React from "react";
-import cn from "classnames";
-import ReactToolTip from "react-tooltip";
+import * as React from 'react';
+import cn from 'classnames';
+import ReactToolTip from 'react-tooltip';
 
 export function makeSection(
   el: JSX.Element,
   title?: string,
-  className: string = ""
+  className: string = ''
 ) {
   return [
-    <div key={0} className={cn("quickview-item", className)}>
+    <div key={0} className={cn('quickview-item', className)}>
       {title && <strong>{title}</strong>}
       {el}
     </div>,
@@ -25,7 +25,7 @@ export function makeButton({
   tooltip,
   keyboardShortcut,
   disabled = false,
-  className = "",
+  className = '',
   id
 }: {
   ref?: any;
@@ -40,18 +40,18 @@ export function makeButton({
   id?: string;
 }) {
   return (
-    <p id={id} ref={ref} className={cn("control", className)} onClick={onClick}>
+    <p id={id} ref={ref} className={cn('control', className)} onClick={onClick}>
       <button
         data-tip
         data-for={icon}
         disabled={disabled}
-        className={cn("button", {
+        className={cn('button', {
           tooltip: !!tooltip,
-          "is-dark": active,
-          "is-white": !active
+          'is-dark': active,
+          'is-white': !active
         })}
       >
-        <span className={cn("icon", { "has-text-dark": !active })}>
+        <span className={cn('icon', { 'has-text-dark': !active })}>
           <i
             className={cn(`fa fa-${icon}`, {
               [iconClass]: true
@@ -65,7 +65,7 @@ export function makeButton({
           <ReactToolTip multiline id={icon} effect="solid" className="content">
             {keyboardShortcut && (
               <strong className="tag">{keyboardShortcut}</strong>
-            )}{" "}
+            )}{' '}
             {tooltip}
           </ReactToolTip>
         )}

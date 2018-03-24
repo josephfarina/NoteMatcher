@@ -1,5 +1,5 @@
-import * as React from "react";
-const debounce = require("lodash.debounce");
+import * as React from 'react';
+const debounce = require('lodash.debounce');
 
 interface Props {
   width: number;
@@ -37,10 +37,10 @@ export default class Input extends React.Component<Props, { value: number }> {
     return (
       <input
         className="slider is-fullwidth"
-        width={"" + width}
-        step={"" + step}
-        min={"" + min}
-        max={"" + max}
+        width={'' + width}
+        step={'' + step}
+        min={'' + min}
+        max={'' + max}
         type="range"
         title={title}
         value={value}

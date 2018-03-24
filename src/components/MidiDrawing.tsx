@@ -1,14 +1,14 @@
-import * as React from "react";
-import { connect } from "react-redux";
-import { audioControl } from "./../common/state";
-import { MidiOverlay } from ".";
-import { MidiOverlay as PureMidiOverlay } from "./MidiOverlay";
-import cn from "classnames";
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { audioControl } from './../common/state';
+import { MidiOverlay } from '.';
+import { MidiOverlay as PureMidiOverlay } from './MidiOverlay';
+import cn from 'classnames';
 
-import "./MidiDrawing.css";
+import './MidiDrawing.css';
 // TODO: DO NOT HAVE TO USE THIS -- but make sure to update it if class name
 // chnages
-const MIDI_DRAWING_ELEMENT_CONTAINER_CLASS_NAME = ".midi-drawing";
+const MIDI_DRAWING_ELEMENT_CONTAINER_CLASS_NAME = '.midi-drawing';
 
 interface Props {
   note: Note;
@@ -31,7 +31,7 @@ interface State {
 class MidiDrawing extends React.PureComponent<Props, State> {
   state: State = { mouseDown: false, selectedBeat: null };
 
-  private midiOverlay: PureMidiOverlay | null;
+  private midiOverlay: PureMidiOverlay | null = null;
 
   render() {
     const {
@@ -46,8 +46,8 @@ class MidiDrawing extends React.PureComponent<Props, State> {
     } = this.props;
     const { selectedBeat } = this.state;
 
-    const isDrawingMode = editMode === "draw";
-    const isEraseMode = editMode === "erase";
+    const isDrawingMode = editMode === 'draw';
+    const isEraseMode = editMode === 'erase';
 
     function intendedPageClick(e: any): number {
       // FIXME: THIS IS A HACK TO GET THE OFFSET OF A PARTICUL DOM NODE
@@ -154,7 +154,7 @@ class MidiDrawing extends React.PureComponent<Props, State> {
       >
         {Array.isArray(selectedBeat) && (
           <div
-            className={cn("midi-drawing-item", { erase: isEraseMode })}
+            className={cn('midi-drawing-item', { erase: isEraseMode })}
             style={{
               left: selectedBeat[0]! * widthOfOneBeatInPixels,
               width:
@@ -209,7 +209,7 @@ function isDefined(num: number | undefined): boolean {
 function pageXFromEvent(e: any): number {
   let pageX = e.pageX;
 
-  if (typeof e.changedTouches !== "undefined") {
+  if (typeof e.changedTouches !== 'undefined') {
     pageX = e.changedTouches[0].pageX;
   }
 

@@ -1,5 +1,5 @@
-import * as React from "react";
-import { scaleLinear } from "d3-scale";
+import * as React from 'react';
+import { scaleLinear } from 'd3-scale';
 
 interface Props {
   height: number;
@@ -19,13 +19,13 @@ const CENTS_OFF_WARNING_THRESHOLD = 15;
 const CENTS_IN_A_SEMITONE = 100;
 const DEFAULT_CANVAS_HEIGHT = 100;
 
-const RED = "#EE6A61";
-const YELLOW = "#FEC625";
-const GREEN = "#23d160";
-const DARK = "#363636";
+const RED = '#EE6A61';
+const YELLOW = '#FEC625';
+const GREEN = '#23d160';
+const DARK = '#363636';
 
 export default class NoteCanvas extends React.Component<Props, {}> {
-  private canvas: HTMLCanvasElement | null;
+  private canvas: HTMLCanvasElement | null = null;
 
   private colorScale: (num: number) => string = scaleLinear()
     .domain([
@@ -37,7 +37,7 @@ export default class NoteCanvas extends React.Component<Props, {}> {
     ])
     .range([RED, YELLOW, GREEN, YELLOW, RED] as any) as any;
 
-  private yScale: (y: number) => number;
+  private yScale: (y: number) => number = () => 0;
 
   private refreshYScale = () => {
     let canvasHeight: number = DEFAULT_CANVAS_HEIGHT;
@@ -56,7 +56,7 @@ export default class NoteCanvas extends React.Component<Props, {}> {
 
   private reset = () => {
     if (!this.canvas) return;
-    const ctx = this.canvas.getContext("2d");
+    const ctx = this.canvas.getContext('2d');
     if (!ctx) return;
 
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -79,7 +79,7 @@ export default class NoteCanvas extends React.Component<Props, {}> {
       return;
 
     if (!this.canvas) return;
-    const ctx = this.canvas.getContext("2d");
+    const ctx = this.canvas.getContext('2d');
     if (!ctx) return;
 
     ctx.beginPath();
@@ -119,7 +119,7 @@ export default class NoteCanvas extends React.Component<Props, {}> {
       false
     );
     ctx.fillStyle = this.colorScale(centsOffExpected);
-    ctx.globalAlpha = .5;
+    ctx.globalAlpha = 0.5;
     ctx.fill();
 
     ctx.beginPath();
@@ -132,13 +132,13 @@ export default class NoteCanvas extends React.Component<Props, {}> {
       false
     );
     ctx.fillStyle = this.colorScale(centsOffExpected);
-    ctx.globalAlpha = .25;
+    ctx.globalAlpha = 0.25;
     ctx.fill();
   };
 
   private drawCenterLine = () => {
     if (!this.canvas) return;
-    const ctx = this.canvas.getContext("2d");
+    const ctx = this.canvas.getContext('2d');
     if (!ctx) return;
 
     // const bottom = this.yScale(-CENTS_OFF_WARNING_THRESHOLD);
@@ -160,7 +160,7 @@ export default class NoteCanvas extends React.Component<Props, {}> {
     const errorThresholdBottom = okayTresholdBottomBottom;
     const errorThresholdBottomBottom = this.yScale(-CENTS_IN_A_SEMITONE);
 
-    if (this.props.note.includes("#")) {
+    if (this.props.note.includes('#')) {
       ctx.globalAlpha = 0.15;
       ctx.fillStyle = DARK;
       ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);

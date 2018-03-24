@@ -1,7 +1,7 @@
-import * as React from "react";
-import cn from "classnames";
+import * as React from 'react';
+import cn from 'classnames';
 
-import "./Radio.css";
+import './Radio.css';
 
 interface Props {
   values: string[];
@@ -27,7 +27,7 @@ export default class Radio extends React.Component<Props, {}> {
               }
             }}
             tabIndex={1}
-            className={cn("radio-box", { active: val === value, disabled })}
+            className={cn('radio-box', { active: val === value, disabled })}
           >
             {val}
           </div>

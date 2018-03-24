@@ -1,13 +1,12 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import registerServiceWorker from "./registerServiceWorker";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
+import './index.css';
 
-if (process.env.NODE_ENV !== "production") {
-  // const {whyDidYouUpdate} = require('why-did-you-update')
-  // whyDidYouUpdate(React)
-}
+// Uncomment for performance testing
+// const {whyDidYouUpdate} = require('why-did-you-update')
+// whyDidYouUpdate(React)
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();

@@ -1,15 +1,15 @@
-import * as React from "react";
-import { connect } from "react-redux";
-import cn from "classnames";
-import "./index.css";
-import { audioControl } from "./../../common/state";
-import { ShareDropdown } from "./Sharing";
-import PlayPauseButton from "./PlayPauseButton";
-import EditingOptionsButtonBar from "./EditingOptionsButtonBar";
-import EllipsisDropdown from "./EllipsisDropdown";
+import * as React from 'react';
+import { connect } from 'react-redux';
+import cn from 'classnames';
+import './index.css';
+import { audioControl } from './../../common/state';
+import { ShareDropdown } from './Sharing';
+import PlayPauseButton from './PlayPauseButton';
+import EditingOptionsButtonBar from './EditingOptionsButtonBar';
+import EllipsisDropdown from './EllipsisDropdown';
 import HelpDropdown from './HelpDropdown';
-import QuickView, { QuickViewButton } from "./QuickView";
-import { MidiGeneratorDropdown } from "./MidiGenerator";
+import QuickView, { QuickViewButton } from './QuickView';
+import { MidiGeneratorDropdown } from './MidiGenerator';
 
 interface Props {
   gotPermissionForAudio: boolean;
@@ -31,10 +31,11 @@ class PlaybackControls extends React.PureComponent<Props, State> {
   };
 
   private windowEventListener: (e: any) => any;
-  private quickViewContainer: HTMLDivElement | null;
-  private quickViewTrigger: HTMLParagraphElement | null;
+  private quickViewContainer: HTMLDivElement | null = null;
+  private quickViewTrigger: HTMLParagraphElement | null = null;
 
-  componentDidMount() {
+  constructor(props: Props) {
+    super(props);
     this.windowEventListener = (e: any) => {
       const clickTrigger =
         this.quickViewTrigger && this.quickViewTrigger.contains(e.target);
@@ -52,11 +53,11 @@ class PlaybackControls extends React.PureComponent<Props, State> {
       }
     };
 
-    window.addEventListener("click", this.windowEventListener);
+    window.addEventListener('click', this.windowEventListener);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("click", this.windowEventListener);
+    window.removeEventListener('click', this.windowEventListener);
   }
 
   render() {
@@ -82,8 +83,8 @@ class PlaybackControls extends React.PureComponent<Props, State> {
               askForPermissionForAudio();
             }}
           >
-            <button className={cn("button is-white", {})}>
-              <span className={cn("icon has-text-dark", {})}>
+            <button className={cn('button is-white', {})}>
+              <span className={cn('icon has-text-dark', {})}>
                 <i className={cn(`fa fa-microphone`, {})} />
               </span>
               <span>Give Microphone Access</span>

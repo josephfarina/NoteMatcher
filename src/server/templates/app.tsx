@@ -1,6 +1,6 @@
 import { Request } from 'express';
 
-export default function (req: Request) {
+export default function(req: Request) {
   const query = req.query;
 
   let initialState: StateRoot | null = null;
@@ -14,9 +14,9 @@ export default function (req: Request) {
 
   const scripts = process.env.JS_BUNDLE;
   const styles = process.env.CSS_BUNDLE;
-  const publicUrl = "/";
+  const publicUrl = '/';
 
-  return (`
+  return `
       <!DOCTYPE html>
       <html lang="en">
         <head>
@@ -46,5 +46,5 @@ export default function (req: Request) {
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         </body>
       </html>
-  `);
+  `;
 }

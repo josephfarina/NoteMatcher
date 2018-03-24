@@ -1,6 +1,6 @@
-import findClosestNote from "./findClosestNote";
-import findCentsOffPitch from "./findCentsOffPitch";
-import { YIN } from "./autoCorrelate";
+import findClosestNote from './findClosestNote';
+import findCentsOffPitch from './findCentsOffPitch';
+import { YIN } from './autoCorrelate';
 
 export default function pitchDetection(
   context: AudioContext,

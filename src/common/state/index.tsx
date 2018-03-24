@@ -1,11 +1,11 @@
-import { createStore, applyMiddleware, combineReducers, compose } from "redux";
-import { createLogger } from "redux-logger";
-import thunk from "redux-thunk";
-import { createSelector } from "reselect";
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import { createLogger } from 'redux-logger';
+import thunk from 'redux-thunk';
+import { createSelector } from 'reselect';
 import {
   responsiveStateReducer,
   responsiveStoreEnhancer
-} from "redux-responsive";
+} from 'redux-responsive';
 
 export function createReducer<S>(
   initialState: S,
@@ -20,17 +20,17 @@ export function createReducer<S>(
   };
 }
 
-import pitchDataReducer from "./pitchData";
-import * as pitchData from "./pitchData";
+import pitchDataReducer from './pitchData';
+import * as pitchData from './pitchData';
 
-import audioControlReducer from "./audioControl";
-import * as audioControl from "./audioControl";
+import audioControlReducer from './audioControl';
+import * as audioControl from './audioControl';
 
-import notificationsReducer from "./notifications";
-import * as notifications from "./notifications";
+import notificationsReducer from './notifications';
+import * as notifications from './notifications';
 
-import browserCompatibilityReducer from "./browserCompatibility";
-import * as browserCompatibility from "./browserCompatibility";
+import browserCompatibilityReducer from './browserCompatibility';
+import * as browserCompatibility from './browserCompatibility';
 
 const reducer = combineReducers({
   pitchData: pitchDataReducer,
@@ -62,12 +62,16 @@ const getStringifiedState: (state: StateRoot) => string = createSelector(
 
 const SITE_URL = window.location.href.split('?')[0];
 export function getStringifiedStateUrl(state: StateRoot) {
-  return `${SITE_URL}?state=${getStringifiedState(state)}`
+  return `${SITE_URL}?state=${getStringifiedState(state)}`;
 }
 
 export function updateUrlToReflectState(state: StateRoot) {
   if (window.history && window.history.replaceState) {
-    window.history.replaceState(null, null as any, getStringifiedStateUrl(state));
+    window.history.replaceState(
+      null,
+      null as any,
+      getStringifiedStateUrl(state)
+    );
   }
 }
 
@@ -80,21 +84,15 @@ try {
 } catch (e) {}
 
 const middleWare: any[] = [thunk];
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== 'production') {
   middleWare.push(createLogger());
 }
+
 const store = createStore(
   reducer,
   initialState,
   compose(responsiveStoreEnhancer, applyMiddleware(...middleWare))
 );
-
-// TODO: delete this and move it to the menu bar -- hack
-// need to get default start and end time on oniti
-if (process.env.NODE_ENV) {
-  // FIXME: no env for testing so undefiend meeans test
-  //store.dispatch(audioControl.startPlaying());
-}
 
 export default store;
 export { pitchData, audioControl, notifications, browserCompatibility };

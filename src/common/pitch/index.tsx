@@ -1,4 +1,4 @@
-import pitchDetection from "./pitchDetection";
+import pitchDetection from './pitchDetection';
 
 export { pitchDetection };
 

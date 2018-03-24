@@ -1,12 +1,12 @@
 // FIXME: the sliding behavior is slightly annoying
 // it jumps arounda bit to much but isnt to bad
-import * as React from "react";
-import { connect } from "react-redux";
-import { AutoSizer } from "react-virtualized";
-import "./TimeSlider.css";
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { AutoSizer } from 'react-virtualized';
+import './TimeSlider.css';
 
-import { audioControl } from "./../common/state";
-const Rnd = require("react-rnd").default;
+import { audioControl } from './../common/state';
+const Rnd = require('react-rnd').default;
 
 const resizingOptions = { right: true, left: true };
 
@@ -19,7 +19,7 @@ interface Props {
 }
 
 class TimeSlider extends React.PureComponent<Props, {}> {
-  private el: HTMLDivElement | null;
+  private el: HTMLDivElement | null = null;
 
   render() {
     const {
@@ -43,7 +43,7 @@ class TimeSlider extends React.PureComponent<Props, {}> {
             noteTicks.push(
               <div
                 key={i}
-                className={`time-slider-beat ${i % 4 === 0 ? "wide" : ""}`}
+                className={`time-slider-beat ${i % 4 === 0 ? 'wide' : ''}`}
                 style={{ left: i * widthOfOneBeat }}
               />
             );
@@ -58,12 +58,12 @@ class TimeSlider extends React.PureComponent<Props, {}> {
             >
               <Rnd
                 className="time-slider-dragger"
-                size={{ height: "100%", width: widthInBeats }}
+                size={{ height: '100%', width: widthInBeats }}
                 position={{ x: startBeat * widthOfOneBeat, y: 0 }}
                 dragGrid={[widthOfOneBeat, height]}
                 resizeGrid={[widthOfOneBeat, 0]}
                 enableResizing={resizingOptions}
-                resizeHandleClasses={{ right: "time-slider-dragger-handle" }}
+                resizeHandleClasses={{ right: 'time-slider-dragger-handle' }}
                 z={1}
                 onResize={(e: any) => {
                   // prevent scrolling the underneath layer

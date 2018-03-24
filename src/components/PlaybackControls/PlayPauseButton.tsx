@@ -1,7 +1,7 @@
-import * as React from "react";
-import { makeButton } from "./util";
-import { audioControl } from "./../../common/state";
-import { connect } from "react-redux";
+import * as React from 'react';
+import { makeButton } from './util';
+import { audioControl } from './../../common/state';
+import { connect } from 'react-redux';
 
 function PlayPauseButton({
   isRecording,
@@ -18,27 +18,27 @@ function PlayPauseButton({
         makeButton({
           onClick: startRecording,
           active: false,
-          icon: "circle",
-          iconClass: "has-text-danger",
+          icon: 'circle',
+          iconClass: 'has-text-danger',
           disabled: isRecording,
-          keyboardShortcut: "CTRL-R",
-          tooltip: "Click to Record and analyze your singing in real time"
+          keyboardShortcut: 'CTRL-R',
+          tooltip: 'Click to Record and analyze your singing in real time'
         })}
 
       {isRecording &&
         makeButton({
           onClick: stopRecording,
           active: false,
-          icon: "pause",
-          keyboardShortcut: "CTRL-R",
-          tooltip: "Click to stop recording"
+          icon: 'pause',
+          keyboardShortcut: 'CTRL-R',
+          tooltip: 'Click to stop recording'
         })}
     </div>
   );
 }
 
 export default connect(
-  state => ({
+  (state: StateRoot) => ({
     isRecording: audioControl.getIsRecording(state)
   }),
   dispatch => ({

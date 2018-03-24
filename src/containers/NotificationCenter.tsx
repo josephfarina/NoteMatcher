@@ -1,62 +1,62 @@
-import * as React from "react";
-import { connect } from "react-redux";
-import { notifications } from "./../common/state";
-import cn from "classnames";
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { notifications } from './../common/state';
+import cn from 'classnames';
 
 const browser = function():
-  | "Opera"
-  | "Firefox"
-  | "Safari"
-  | "Chrome"
-  | "IE"
-  | "Edge"
-  | "Blink"
+  | 'Opera'
+  | 'Firefox'
+  | 'Safari'
+  | 'Chrome'
+  | 'IE'
+  | 'Edge'
+  | 'Blink'
   | null {
   // Return cached result if avalible, else get result then cache it.
   if (browser.prototype._cachedResult) return browser.prototype._cachedResult;
 
   // Opera 8.0+
-  var isOpera =
+  let isOpera =
     (!!(window as any).opr && !!(window as any).opr.addons) ||
     !!(window as any).opera ||
-    navigator.userAgent.indexOf(" OPR/") >= 0;
+    navigator.userAgent.indexOf(' OPR/') >= 0;
 
   // Firefox 1.0+
-  var isFirefox = typeof (window as any).InstallTrigger !== "undefined";
+  let isFirefox = typeof (window as any).InstallTrigger !== 'undefined';
 
   // Safari 3.0+ "[object HTMLElementConstructor]"
-  var isSafari =
+  let isSafari =
     /constructor/i.test((window as any).HTMLElement) ||
     (function(p) {
-      return p.toString() === "[object SafariRemoteNotification]";
-    })(!(window as any)["safari"] || (window as any).safari.pushNotification) ||
-    (navigator.userAgent.toLowerCase().indexOf("safari") !== -1 &&
-      navigator.userAgent.toLowerCase().indexOf("chrome") === -1);
+      return p.toString() === '[object SafariRemoteNotification]';
+    })(!(window as any)['safari'] || (window as any).safari.pushNotification) ||
+    (navigator.userAgent.toLowerCase().indexOf('safari') !== -1 &&
+      navigator.userAgent.toLowerCase().indexOf('chrome') === -1);
 
   // Internet Explorer 6-11
-  var isIE = /*@cc_on!@*/ false || !!(document as any).documentMode;
+  let isIE = /*@cc_on!@*/ false || !!(document as any).documentMode;
 
   // Edge 20+
-  var isEdge = !isIE && !!(window as any).StyleMedia;
+  let isEdge = !isIE && !!(window as any).StyleMedia;
 
   // Chrome 1+
-  var isChrome = !!(window as any).chrome && !!(window as any).chrome.webstore;
+  let isChrome = !!(window as any).chrome && !!(window as any).chrome.webstore;
 
   // Blink engine detection
-  var isBlink = (isChrome || isOpera) && !!(window as any).CSS;
+  let isBlink = (isChrome || isOpera) && !!(window as any).CSS;
 
   return (browser.prototype._cachedResult = isOpera
-    ? "Opera"
+    ? 'Opera'
     : isFirefox
-      ? "Firefox"
+      ? 'Firefox'
       : isSafari
-        ? "Safari"
+        ? 'Safari'
         : isChrome
-          ? "Chrome"
-          : isIE ? "IE" : isEdge ? "Edge" : isBlink ? "Blink" : null);
+          ? 'Chrome'
+          : isIE ? 'IE' : isEdge ? 'Edge' : isBlink ? 'Blink' : null);
 };
 
-import "./NotificationCenter.css";
+import './NotificationCenter.css';
 
 interface Props {
   notifications: NotificationI[];
@@ -73,12 +73,12 @@ function Message({
   browserIssue;
 
   const dangerLevel =
-    type === "danger" ? "Error" : type === "warning" ? "Issue" : "";
+    type === 'danger' ? 'Error' : type === 'warning' ? 'Issue' : '';
   const browserMessage =
     browserIssue &&
     (() => {
       switch (browser()) {
-        case "Safari":
+        case 'Safari':
           return [
             <p>
               It looks like you may be using an older version of Safari. This
@@ -90,18 +90,18 @@ function Message({
               latest software update.
             </p>,
             <p>
-              <strong>For Desktops: </strong> We recommend using{" "}
+              <strong>For Desktops: </strong> We recommend using{' '}
               <a href="https://www.mozilla.org/en-US/firefox/" target="_blank">
                 Firefox
-              </a>{" "}
-              or{" "}
+              </a>{' '}
+              or{' '}
               <a href="https://www.google.com/chrome/browser/desktop/index.html">
                 Chrome
-              </a>{" "}
+              </a>{' '}
               for the most optimal experience.
             </p>
           ];
-        case "Chrome":
+        case 'Chrome':
           return [
             <p>
               It looks like you may be using an outdated version of Chrome that
@@ -114,7 +114,7 @@ function Message({
               </a>
             </p>
           ];
-        case "Firefox":
+        case 'Firefox':
           return [
             <p>
               It looks like you may be using an outdated version of Firefox that
@@ -131,14 +131,14 @@ function Message({
           return (
             <p>
               It looks like you are using an older browser. For the most optimal
-              desktop experience we recommend using{" "}
+              desktop experience we recommend using{' '}
               <a href="https://www.mozilla.org/en-US/firefox/" target="_blank">
                 Firefox
-              </a>{" "}
-              or{" "}
+              </a>{' '}
+              or{' '}
               <a href="https://www.google.com/chrome/browser/desktop/index.html">
                 Chrome
-              </a>{" "}
+              </a>{' '}
             </p>
           );
       }
@@ -146,14 +146,14 @@ function Message({
 
   return (
     <article
-      className={cn("message", {
-        "is-warning": type === "warning",
-        "is-danger": type === "danger"
+      className={cn('message', {
+        'is-warning': type === 'warning',
+        'is-danger': type === 'danger'
       })}
     >
       <div className="message-header">
         <strong>
-          {browserIssue && "Your Browser Is Outdated"}
+          {browserIssue && 'Your Browser Is Outdated'}
           {!browserIssue && `An Unexpected ${dangerLevel} Happened`}
         </strong>
         <button

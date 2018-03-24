@@ -1,9 +1,9 @@
-import { createReducer } from ".";
+import { createReducer } from '.';
 
 const initialState: StateNotifications = [];
 
-const DELETE_NOTIFICATION = "state::notifications::deleteNotifications";
-const ADD_NOTIFICATION = "state::notifications::addNotifications";
+const DELETE_NOTIFICATION = 'state::notifications::deleteNotifications';
+const ADD_NOTIFICATION = 'state::notifications::addNotifications';
 
 export default createReducer<StateNotifications>(initialState, {
   [DELETE_NOTIFICATION](state, action) {

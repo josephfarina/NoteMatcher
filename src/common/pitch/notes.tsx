@@ -1,174 +1,174 @@
 const notes: { note: Note; frequency: number }[] = [
   {
-    note: "F#5",
+    note: 'F#5',
     frequency: 739.99
   },
   {
-    note: "F5",
+    note: 'F5',
     frequency: 698.46
   },
   {
-    note: "E5",
+    note: 'E5',
     frequency: 659.25
   },
   {
-    note: "D#5",
+    note: 'D#5',
     frequency: 622.25
   },
   {
-    note: "D5",
+    note: 'D5',
     frequency: 587.33
   },
   {
-    note: "C#5",
+    note: 'C#5',
     frequency: 554.37
   },
   {
-    note: "C5",
+    note: 'C5',
     frequency: 523.25
   },
   {
-    note: "B4",
+    note: 'B4',
     frequency: 493.88
   },
   {
-    note: "A#4",
+    note: 'A#4',
     frequency: 466.16
   },
   {
-    note: "A4",
+    note: 'A4',
     frequency: 440
   },
   {
-    note: "G#4",
+    note: 'G#4',
     frequency: 415.3
   },
   {
-    note: "G4",
+    note: 'G4',
     frequency: 392
   },
   {
-    note: "F#4",
+    note: 'F#4',
     frequency: 369.99
   },
   {
-    note: "F4",
+    note: 'F4',
     frequency: 349.23
   },
   {
-    note: "E4",
+    note: 'E4',
     frequency: 329.63
   },
   {
-    note: "D#4",
+    note: 'D#4',
     frequency: 311.13
   },
   {
-    note: "D4",
+    note: 'D4',
     frequency: 293.66
   },
   {
-    note: "C#4",
+    note: 'C#4',
     frequency: 277.18
   },
   {
-    note: "C4",
+    note: 'C4',
     frequency: 261.63
   },
   {
-    note: "B3",
+    note: 'B3',
     frequency: 246.94
   },
   {
-    note: "A#3",
+    note: 'A#3',
     frequency: 233.08
   },
   {
-    note: "A3",
+    note: 'A3',
     frequency: 220
   },
   {
-    note: "G#3",
+    note: 'G#3',
     frequency: 207.65
   },
   {
-    note: "G3",
+    note: 'G3',
     frequency: 196
   },
   {
-    note: "F#3",
+    note: 'F#3',
     frequency: 185
   },
   {
-    note: "F3",
+    note: 'F3',
     frequency: 174.61
   },
   {
-    note: "E3",
+    note: 'E3',
     frequency: 164.81
   },
   {
-    note: "D#3",
+    note: 'D#3',
     frequency: 155.56
   },
   {
-    note: "D3",
+    note: 'D3',
     frequency: 146.83
   },
   {
-    note: "C#3",
+    note: 'C#3',
     frequency: 138.59
   },
   {
-    note: "C3",
+    note: 'C3',
     frequency: 130.81
   },
   {
-    note: "B2",
+    note: 'B2',
     frequency: 123.47
   },
   {
-    note: "A#2",
+    note: 'A#2',
     frequency: 116.54
   },
   {
-    note: "A2",
+    note: 'A2',
     frequency: 110
   },
   {
-    note: "G#2",
+    note: 'G#2',
     frequency: 103.83
   },
   {
-    note: "G2",
+    note: 'G2',
     frequency: 98
   },
   {
-    note: "F#2",
+    note: 'F#2',
     frequency: 92.5
   },
   {
-    note: "F2",
+    note: 'F2',
     frequency: 87.31
   },
   {
-    note: "E2",
+    note: 'E2',
     frequency: 82.41
   },
   {
-    note: "D#2",
+    note: 'D#2',
     frequency: 77.78
   },
   {
-    note: "D2",
+    note: 'D2',
     frequency: 73.42
   },
   {
-    note: "C#2",
+    note: 'C#2',
     frequency: 69.3
   },
   {
-    note: "C2",
+    note: 'C2',
     frequency: 65.41
   }
 ];

@@ -1,8 +1,8 @@
-import * as React from "react";
-import { connect } from "react-redux";
-import notes from "./../common/pitch/notes";
-import "./Scrubber.css";
-import { audioControl } from "./../common/state";
+import * as React from 'react';
+import { connect } from 'react-redux';
+import notes from './../common/pitch/notes';
+import './Scrubber.css';
+import { audioControl } from './../common/state';
 
 interface Props {
   width: number;

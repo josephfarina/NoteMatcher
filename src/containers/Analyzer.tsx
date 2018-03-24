@@ -1,35 +1,34 @@
-import * as React from "react";
-import { connect } from "react-redux";
-import { audioControl } from "./../common/state";
-import { AutoSizer } from "react-virtualized";
-import notes, { INDEX_MAP_BY_NOTE } from "./../common/pitch/notes";
-import cn from "classnames";
-const throttle = require("lodash.throttle");
+import * as React from 'react';
+import notes, { INDEX_MAP_BY_NOTE } from './../common/pitch/notes';
+import cn from 'classnames';
+import { connect } from 'react-redux';
+import { audioControl } from './../common/state';
+import { AutoSizer } from 'react-virtualized';
 
-import "./Analyzer.css";
+const throttle = require('lodash.throttle');
+
+import './Analyzer.css';
 
 import {
-  Scrubber,
+  BeatMarkers,
   NoteGraph,
   PlaybackControls,
-  BeatMarkers,
+  Scrubber,
   TimeSlider
-} from "./../components";
+} from './../components';
 
 interface Props {
   beatCount: number;
   beatsInView: [number, number];
+  changeEditMode: (mode: EditMode) => void;
   currentBeat: number;
-  updateBeatsInView: (beats: [number, number]) => void;
+  dispatch?: (action: any) => any;
   isRecordingOrPlaying: boolean;
-  rowHeight: number;
   lastNoteRecorded: Note | null;
   midi: MidiNote[];
-
-  changeEditMode: (mode: EditMode) => void;
+  rowHeight: number;
   toggleRecording: () => void;
-
-  dispatch?: (action: any) => any;
+  updateBeatsInView: (beats: [number, number]) => void;
 }
 
 const NAV_HEIGHT = 75;
@@ -40,12 +39,11 @@ class Analyzer extends React.PureComponent<Props, {}> {
     this.scrollYToNote = throttle(this.scrollYToNote, 50);
   }
 
-  private containerEl: HTMLDivElement | null;
-  private analyzerContainerEl: HTMLDivElement | null;
+  private analyzerContainerEl: HTMLDivElement | null = null;
   private autoSizerRef: any;
+  private containerEl: HTMLDivElement | null = null;
+  private globalKeyListener: (e: KeyboardEvent) => void = () => undefined;
   private leftOffset = 100;
-
-  private globalKeyListener: (e: KeyboardEvent) => void;
 
   componentDidMount() {
     const { toggleRecording, changeEditMode } = this.props;
@@ -57,11 +55,11 @@ class Analyzer extends React.PureComponent<Props, {}> {
         const actions: { [key: number]: () => void } = {
           [18]: toggleRecording, // CTRL - R
           [8]: () => changeEditMode(null), // CTRL - H
-          [4]: () => changeEditMode("draw"), // CTRL - D
-          [5]: () => changeEditMode("erase") // CTRL - E
+          [4]: () => changeEditMode('draw'), // CTRL - D
+          [5]: () => changeEditMode('erase') // CTRL - E
         };
 
-        if (Object.keys(actions).includes("" + key)) {
+        if (Object.keys(actions).includes('' + key)) {
           e.preventDefault();
           e.stopPropagation();
           actions[key]();
@@ -71,22 +69,26 @@ class Analyzer extends React.PureComponent<Props, {}> {
       }
     };
 
-    window.addEventListener("keypress", this.globalKeyListener);
+    window.addEventListener('keypress', this.globalKeyListener);
 
     let firstNoteFound: MidiNote;
     for (let i = 0; i < this.props.midi.length; i++) {
       if (Array.isArray(this.props.midi[i])) {
         console.log(i);
-         firstNoteFound  = this.props.midi[i];
+        firstNoteFound = this.props.midi[i];
         break;
       }
     }
 
-    setTimeout(() => window.requestAnimationFrame(() => this.scrollYToNote(firstNoteFound)), 100); // make sure page is actually loaded
+    setTimeout(
+      () =>
+        window.requestAnimationFrame(() => this.scrollYToNote(firstNoteFound)),
+      100
+    ); // make sure page is actually loaded
   }
 
   componentWillUnmount() {
-    window.removeEventListener("keypress", this.globalKeyListener);
+    window.removeEventListener('keypress', this.globalKeyListener);
   }
 
   componentWillReceiveProps(nextProps: Props) {
@@ -152,7 +154,7 @@ class Analyzer extends React.PureComponent<Props, {}> {
     const { beatCount, isRecordingOrPlaying, rowHeight } = this.props;
 
     return (
-      <div style={{ width: "100vw" }}>
+      <div style={{ width: '100vw' }}>
         <AutoSizer
           ref={(autoSizerRef: any) => (this.autoSizerRef = autoSizerRef)}
           disableHeight
@@ -172,7 +174,7 @@ class Analyzer extends React.PureComponent<Props, {}> {
             const leftColStyle = {
               minWidth: this.leftOffset,
               maxWidth: this.leftOffset, // make sure it is exactly 100px
-              width: "100%"
+              width: '100%'
             };
 
             width = this.getSingleBeatWidth(width) * beatCount;
@@ -185,23 +187,14 @@ class Analyzer extends React.PureComponent<Props, {}> {
               <div key={1} className="time-bar">
                 <div
                   style={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
                     ...leftColStyle
                   }}
                 >
-                  {/* 
-                    TODO Move measures here 
-                    <div>Measures</div>
-                    <div className="select" style={{ flex: '1 1 100%' }}>
-                      <select style={{ width: '100%' }}>
-                        <option>0</option>
-                      </select>
-                    </div>
-                  */}
                 </div>
-                <div style={{ height: "100%", width: "100%" }}>
+                <div style={{ height: '100%', width: '100%' }}>
                   <TimeSlider />
                 </div>
               </div>,
@@ -209,25 +202,25 @@ class Analyzer extends React.PureComponent<Props, {}> {
               <div
                 key={2}
                 ref={ref => (this.analyzerContainerEl = ref)}
-                className={cn("analyzer-container", {
-                  "disable-scrolling": isRecordingOrPlaying
+                className={cn('analyzer-container', {
+                  'disable-scrolling': isRecordingOrPlaying
                 })}
               >
                 <div style={leftColStyle} className="analyzer-left-col">
                   {notes.map(({ note }) => {
-                    const isSharp = note.includes("#");
+                    const isSharp = note.includes('#');
 
                     return (
                       <div
                         key={note}
                         style={{ height: rowHeight }}
                         onClick={() => audioControl.playNote(note)}
-                        className={cn("piano-key", {
+                        className={cn('piano-key', {
                           black: isSharp,
                           white: !isSharp,
-                          "large-text": rowHeight >= 40,
-                          "small-text": rowHeight > 20 && rowHeight < 40,
-                          "tiny-text": rowHeight <= 20
+                          'large-text': rowHeight >= 40,
+                          'small-text': rowHeight > 20 && rowHeight < 40,
+                          'tiny-text': rowHeight <= 20
                         })}
                       >
                         {note}
@@ -260,24 +253,17 @@ class Analyzer extends React.PureComponent<Props, {}> {
 
 export default connect(
   (state: StateRoot) => ({
-    beatsInView: audioControl.getBeatsInView(state),
     beatCount: audioControl.getBeatCount(state),
+    beatsInView: audioControl.getBeatsInView(state),
     currentBeat: audioControl.getCurrentBeat(state),
-    isRecordingOrPlaying:
-      audioControl.getIsRecording(state) || audioControl.getIsPlaying(state),
-    rowHeight: audioControl.getRowHeight(state),
+    isRecordingOrPlaying: audioControl.getIsRecording(state) || audioControl.getIsPlaying(state),
     lastNoteRecorded: audioControl.getLastNoteRecorded(state),
-    midi: audioControl.getMidi(state)
+    midi: audioControl.getMidi(state),
+    rowHeight: audioControl.getRowHeight(state),
   }),
   dispatch => ({
-    updateBeatsInView(beats: [number, number]) {
-      dispatch(audioControl.updateBeatsInView(beats));
-    },
-    toggleRecording() {
-      dispatch(audioControl.toggleRecording());
-    },
-    changeEditMode(mode: EditMode) {
-      dispatch(audioControl.changeEditMode(mode));
-    }
+    changeEditMode(mode: EditMode) { dispatch(audioControl.changeEditMode(mode)); },
+    toggleRecording() { dispatch(audioControl.toggleRecording()); },
+    updateBeatsInView(beats: [number, number]) { dispatch(audioControl.updateBeatsInView(beats)); },
   })
 )(Analyzer);

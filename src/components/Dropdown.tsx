@@ -1,7 +1,7 @@
-import * as React from "react";
-import "./Dropdown.css";
+import * as React from 'react';
+import './Dropdown.css';
 
-import cn from "classnames";
+import cn from 'classnames';
 
 export default class Dropdown extends React.Component<
   {
@@ -24,20 +24,20 @@ export default class Dropdown extends React.Component<
 
   private resizeListener: any;
   private clickListener: any;
-  private el: HTMLDivElement | null;
+  private el: HTMLDivElement | null = null;
 
   componentDidMount() {
     let passiveSupported = false;
 
     // detect if passive event listeners are supoprted
     try {
-      const options = Object.defineProperty({}, "passive", {
+      const options = Object.defineProperty({}, 'passive', {
         get: function() {
           passiveSupported = true;
         }
       });
 
-      window.addEventListener("test", null as any, options);
+      window.addEventListener('test', null as any, options);
     } catch (err) {}
 
     this.resizeListener = () => {
@@ -54,7 +54,7 @@ export default class Dropdown extends React.Component<
 
     this.resizeListener();
 
-    window.addEventListener("resize", this.resizeListener, (passiveSupported
+    window.addEventListener('resize', this.resizeListener, (passiveSupported
       ? { passive: true }
       : false) as any);
 
@@ -64,15 +64,15 @@ export default class Dropdown extends React.Component<
       this.close();
     };
 
-    window.addEventListener("click", this.clickListener);
+    window.addEventListener('click', this.clickListener);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.resizeListener);
-    window.removeEventListener("click", this.clickListener);
+    window.removeEventListener('resize', this.resizeListener);
+    window.removeEventListener('click', this.clickListener);
   }
 
-  private ref: HTMLDivElement | null;
+  private ref: HTMLDivElement | null = null;
 
   public close = () => {
     this.setState({ open: false });
@@ -93,11 +93,11 @@ export default class Dropdown extends React.Component<
     return (
       <div
         ref={ref => (this.el = ref)}
-        className={cn("dropdown", className, {
-          "is-active": clickable && this.state.open,
-          "is-hoverable": !clickable,
-          "is-right": right,
-          "is-up": this.state.dropUp
+        className={cn('dropdown', className, {
+          'is-active': clickable && this.state.open,
+          'is-hoverable': !clickable,
+          'is-right': right,
+          'is-up': this.state.dropUp
         })}
       >
         <div
@@ -108,10 +108,10 @@ export default class Dropdown extends React.Component<
           {button}
         </div>
         <div
-          className={cn("dropdown-menu", {
-            "dropdown--full-screen-up": fullScreenUpMobile,
-            "dropdown--full-screen": fullScreen,
-            "dropdown--half-screen": halfScreen
+          className={cn('dropdown-menu', {
+            'dropdown--full-screen-up': fullScreenUpMobile,
+            'dropdown--full-screen': fullScreen,
+            'dropdown--half-screen': halfScreen
           })}
         >
           <div className="dropdown-content">{content}</div>

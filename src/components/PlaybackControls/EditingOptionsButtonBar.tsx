@@ -1,5 +1,5 @@
-import * as React from "react";
-import { makeButton } from "./util";
+import * as React from 'react';
+import { makeButton } from './util';
 
 export default function EditingOptionsButtonBar({
   changeEditMode,
@@ -15,39 +15,39 @@ export default function EditingOptionsButtonBar({
           changeEditMode(null);
         },
         active: editMode === null,
-        icon: "hand-pointer-o",
-        keyboardShortcut: "CTRL-H",
+        icon: 'hand-pointer-o',
+        keyboardShortcut: 'CTRL-H',
         tooltip:
-          "This mode lets you drag and move around the chart and prevents the editing of any MIDI"
+          'This mode lets you drag and move around the chart and prevents the editing of any MIDI'
       })}
 
       {makeButton({
         onClick: () => {
-          if (editMode === "draw") {
+          if (editMode === 'draw') {
             changeEditMode(null);
           } else {
-            changeEditMode("draw");
+            changeEditMode('draw');
           }
         },
-        active: editMode === "draw",
-        icon: "pencil",
-        keyboardShortcut: "CTRL-D",
-        tooltip: "This mode lets you both resize, drag, and draw in MIDI notes."
+        active: editMode === 'draw',
+        icon: 'pencil',
+        keyboardShortcut: 'CTRL-D',
+        tooltip: 'This mode lets you both resize, drag, and draw in MIDI notes.'
       })}
 
       {makeButton({
         onClick: () => {
-          if (editMode === "erase") {
+          if (editMode === 'erase') {
             changeEditMode(null);
           } else {
-            changeEditMode("erase");
+            changeEditMode('erase');
           }
         },
-        active: editMode === "erase",
-        icon: "eraser",
-        keyboardShortcut: "CTRL-E",
+        active: editMode === 'erase',
+        icon: 'eraser',
+        keyboardShortcut: 'CTRL-E',
         tooltip:
-          "This mode lets you erase already drawn MIDI. Just drag over any notes you would like to erase."
+          'This mode lets you erase already drawn MIDI. Just drag over any notes you would like to erase.'
       })}
     </div>
   );

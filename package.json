@@ -121,6 +121,6 @@
 
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
-    "prettier": "find . | egrep -v node_modules | egrep \".tsx$\" | xargs prettier --write"
+    "prettier": "find . | egrep -v node_modules | egrep \".tsx$\" | xargs prettier --write --single-quote"
   }
 }

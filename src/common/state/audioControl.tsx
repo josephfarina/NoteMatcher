@@ -1,12 +1,17 @@
-import * as M from "moment";
-import { createReducer, pitchData, browserCompatibility, updateUrlToReflectState } from "./";
-import { scaleLinear } from "d3-scale";
-import { createSelector } from "reselect";
-import { pitchDetection } from "./../pitch";
-import { getMajorScale, buildMidiFromScale } from "./../musicMath";
-import createOscillator from "./../createOscillator";
-import notes, { FREQUENCY_MAP_BY_NOTE } from "./../pitch/notes";
-const RecordRTC = require("recordrtc");
+import * as M from 'moment';
+import {
+  createReducer,
+  pitchData,
+  browserCompatibility,
+  updateUrlToReflectState
+} from './';
+import { scaleLinear } from 'd3-scale';
+import { createSelector } from 'reselect';
+import { pitchDetection } from './../pitch';
+import { getMajorScale, buildMidiFromScale } from './../musicMath';
+import createOscillator from './../createOscillator';
+import notes, { FREQUENCY_MAP_BY_NOTE } from './../pitch/notes';
+const RecordRTC = require('recordrtc');
 
 // prevent errors when rendering in node
 function performanceNow() {
@@ -18,10 +23,10 @@ function performanceNow() {
 }
 
 const MIDI_PLAYBACK_OPTIONS: MidiPlaybackOption[] = [
-  "Always Play MIDI",
+  'Always Play MIDI',
   //"While Recording",
-  "Only The First Note",
-  "Never Play MIDI"
+  'Only The First Note',
+  'Never Play MIDI'
 ];
 
 const DEFAULT_MIDI_GAIN = 0.5;
@@ -44,7 +49,7 @@ const initialState: StateAudioControl = {
   editMode: null,
   beatsInView: [0, 4 * 4], // find a way a better way to default
   rowHeight: 50,
-  midiPlaybackOption: "Always Play MIDI",
+  midiPlaybackOption: 'Always Play MIDI',
   midiPlaybackVolume: DEFAULT_MIDI_GAIN,
   audioPlaybackVolume: DEFAULT_AUDIO_GAIN,
   metronome: true,
@@ -63,28 +68,28 @@ let PLAYING_INTERVAL: any;
 let RECORDING_STREAM: MediaStream;
 let AUDIO_PLAYER: HTMLAudioElement | null;
 
-const START_PLAYING = "recordingSettings::startPlaying";
-const STOP_PLAYING = "recordingSettings::stopPlaying";
-const START_RECORDING = "recordingSettings::startRecording";
-const STOP_RECORDING = "recordingSettings::stopRecording";
-const RESET_TIME = "recordingSettings::resetTime";
-const UPDATE_CURRENT_BEAT = "recordingSettings::updateCurrentBeat";
-const CLEAR_AUDIO_URL = "recordingSettings::clearAudioUrl";
-const UPDATE_MIDI_VALUES = "recordingSettings::updateMidiValues";
-const TOGLE_EDIT_MIDI_NOTES_MODE = "recordingSettings::editMidiNotesMode";
-const UPDATE_BEATS_IN_VIEW = "recordingSettings::updateBeatsInView";
-const UPDATE_ROW_HEIGHT = "recordingSettings::updateRowHeight";
+const START_PLAYING = 'recordingSettings::startPlaying';
+const STOP_PLAYING = 'recordingSettings::stopPlaying';
+const START_RECORDING = 'recordingSettings::startRecording';
+const STOP_RECORDING = 'recordingSettings::stopRecording';
+const RESET_TIME = 'recordingSettings::resetTime';
+const UPDATE_CURRENT_BEAT = 'recordingSettings::updateCurrentBeat';
+const CLEAR_AUDIO_URL = 'recordingSettings::clearAudioUrl';
+const UPDATE_MIDI_VALUES = 'recordingSettings::updateMidiValues';
+const TOGLE_EDIT_MIDI_NOTES_MODE = 'recordingSettings::editMidiNotesMode';
+const UPDATE_BEATS_IN_VIEW = 'recordingSettings::updateBeatsInView';
+const UPDATE_ROW_HEIGHT = 'recordingSettings::updateRowHeight';
 const UPDATE_MIDI_PLAYBACK_OPTION =
-  "recordingSettings::updateMidiPlaybackSettings";
+  'recordingSettings::updateMidiPlaybackSettings';
 const UPDATE_MIDI_PLAYBACK_VOLUME =
-  "recordingSettings::updateMidiPlaybackVolumen";
+  'recordingSettings::updateMidiPlaybackVolumen';
 const UPDATE_AUDIO_PLAYBACK_VOLUME =
-  "recordingSettings::updateAudioPlaybackVolume";
-const UPDATE_TEMPO = "recordingSettings::updateTempo";
-const TOGGLE_METRONOME = "recordingSettings::toggleMetronome";
-const UPDATE_MEASURES = "recordingSettings::updateMeasures";
-const UPDATE_LAST_NOTE_RECORDED = "recordingSettings::updateLastNoteRecorded";
-const GOT_PERMISSION_FOR_AUDIO = "recordingSettings:gotPermissionForAudio";
+  'recordingSettings::updateAudioPlaybackVolume';
+const UPDATE_TEMPO = 'recordingSettings::updateTempo';
+const TOGGLE_METRONOME = 'recordingSettings::toggleMetronome';
+const UPDATE_MEASURES = 'recordingSettings::updateMeasures';
+const UPDATE_LAST_NOTE_RECORDED = 'recordingSettings::updateLastNoteRecorded';
+const GOT_PERMISSION_FOR_AUDIO = 'recordingSettings:gotPermissionForAudio';
 
 export default createReducer<StateAudioControl>(initialState, {
   [RESET_TIME](state) {
@@ -382,14 +387,14 @@ export function updateBeatsInView(
   return (dispatch, getState) => {
     dispatch({ type: UPDATE_BEATS_IN_VIEW, payload });
     updateUrlToReflectState(getState());
-  }
+  };
 }
 
 export function updateTempo(tempo: number): Thunk<number> {
   return (dispatch, getState) => {
     dispatch({ type: UPDATE_TEMPO, payload: tempo });
     updateUrlToReflectState(getState());
-  }
+  };
 }
 
 export function updateMeasures(measures: number): Thunk<any> {
@@ -501,10 +506,10 @@ export function startRecording(): Thunk<any> {
     dispatch(startPlaying());
 
     try {
-      AUDIO_RECORDER = RecordRTC(RECORDING_STREAM, { type: "audio" });
+      AUDIO_RECORDER = RecordRTC(RECORDING_STREAM, { type: 'audio' });
       AUDIO_RECORDER.startRecording();
     } catch (e) {
-      console.warn(e, "error trying to record");
+      console.warn(e, 'error trying to record');
     }
 
     ANIMATION_FRAME = window.requestAnimationFrame(checkPitch);
@@ -521,7 +526,7 @@ export function stopPlaying(): Thunk<any> {
   return dispatch => {
     clearInterval(PLAYING_INTERVAL);
     if (AUDIO_PLAYER) {
-      AUDIO_PLAYER.src = "";
+      AUDIO_PLAYER.src = '';
       AUDIO_PLAYER = null;
     }
 
@@ -606,21 +611,18 @@ export function startPlaying(): Thunk<any> {
 
         const selectedMidiOption = getSelectedMidiPlaybackOption(state);
 
-        if (selectedMidiOption === "Never Play MIDI") {
+        if (selectedMidiOption === 'Never Play MIDI') {
           return;
         }
         if (
-          selectedMidiOption === "Only The First Note" &&
+          selectedMidiOption === 'Only The First Note' &&
           !getIsRecording(state)
         ) {
           return;
         }
 
-        if (typeof scheduledTill === "undefined") {
-          if (
-            getSelectedMidiPlaybackOption(state) ===
-              "Only The First Note"
-          ) {
+        if (typeof scheduledTill === 'undefined') {
+          if (getSelectedMidiPlaybackOption(state) === 'Only The First Note') {
             lookAhead = 1;
           }
 
@@ -630,7 +632,7 @@ export function startPlaying(): Thunk<any> {
           scheduledTill = lookAhead;
         } else if (beat === scheduledTill - bufferThreshold) {
           for (let i = scheduledTill + 1; i <= scheduledTill + lookAhead; i++) {
-            if (selectedMidiOption !== "Only The First Note") {
+            if (selectedMidiOption !== 'Only The First Note') {
               if (i >= beatTimes.length) break;
               scheduleNoteByBeat(i, audioContextCurrTime);
             }
@@ -648,7 +650,7 @@ export function startPlaying(): Thunk<any> {
       beatTimes.forEach((time, i) => {
         const start = time / 1000 + audioContextCurrTime;
         const end = start + 60 / tempo / 4;
-        const osc = (AUDIO_CONTEXT).createOscillator(); //AUDIO_CONTEXT.createOscillator();
+        const osc = AUDIO_CONTEXT.createOscillator(); //AUDIO_CONTEXT.createOscillator();
         OSCILLATORS.push(osc);
         osc.connect(METRONOME_GAIN_NODE);
         osc.frequency.value = i % 4 === 0 ? 880 : 440;
@@ -754,7 +756,7 @@ export function getBeatNumberOfDrag(state: StateRoot) {
       if (minDiff === null || diff < minDiff) {
         closest = i;
         minDiff = diff;
-      } 
+      }
     }
 
     return closest;
@@ -775,7 +777,7 @@ export function updateMidiValues(payload: MidiNote[]): Thunk<any> {
     });
 
     updateUrlToReflectState(getState());
-  }
+  };
 }
 
 export function editMidiNote(
@@ -884,7 +886,7 @@ function deleteByBeat(originalBeat: MidiNote): Thunk<any> {
 
 function scheduleNote(freq: number, start: number, end: number) {
   if (!Number.isFinite(start) || !Number.isFinite(end) || end < start) {
-    console.warn("Tryed to play a non finite note");
+    console.warn('Tryed to play a non finite note');
     return;
   }
 
@@ -907,7 +909,7 @@ export function playNote(note: Note) {
   PIANO_KEY_OSCILLATOR = createOscillator(AUDIO_CONTEXT); // .createOscillator();
   PIANO_KEY_OSCILLATOR.connect(GAIN_NODE);
   PIANO_KEY_OSCILLATOR.frequency.value = FREQUENCY_MAP_BY_NOTE[note];
-  console.log("start");
+  console.log('start');
   PIANO_KEY_OSCILLATOR.start(AUDIO_CONTEXT.currentTime);
   PIANO_KEY_OSCILLATOR.stop(AUDIO_CONTEXT.currentTime + 1);
 }
@@ -918,7 +920,7 @@ export function updateMidiPlaybackOption(
   return (dispatch, getState) => {
     dispatch({ type: UPDATE_MIDI_PLAYBACK_OPTION, payload });
     updateUrlToReflectState(getState());
-  }
+  };
 }
 
 export function updateMidiPlaybackVolume(
@@ -928,7 +930,7 @@ export function updateMidiPlaybackVolume(
     GAIN_NODE.gain.value = numberOutOfOne * GAIN_MULTIPLIER;
     dispatch({ type: UPDATE_MIDI_PLAYBACK_VOLUME, payload: numberOutOfOne });
     updateUrlToReflectState(getState());
-  }
+  };
 }
 
 export function updateAudioPlaybackVolume(
@@ -938,7 +940,7 @@ export function updateAudioPlaybackVolume(
     AUDIO_PLAYER && (AUDIO_PLAYER.volume = numberOutOfOne);
     dispatch({ type: UPDATE_AUDIO_PLAYBACK_VOLUME, payload: numberOutOfOne });
     updateUrlToReflectState(getState());
-  }
+  };
 }
 
 // Misc
@@ -946,14 +948,14 @@ export function updateAudioPlaybackVolume(
 export function formatDuration(milli: number /* in milliseconds */): string {
   const dur = M.duration(milli);
 
-  let minute = "" + dur.minutes();
-  if (minute.length === 1) minute = "0" + minute;
+  let minute = '' + dur.minutes();
+  if (minute.length === 1) minute = '0' + minute;
 
-  let second = "" + dur.seconds();
-  if (second.length === 1) second = "0" + second;
+  let second = '' + dur.seconds();
+  if (second.length === 1) second = '0' + second;
 
-  let milliseconds = "" + dur.milliseconds();
-  if (milliseconds.length === 1) milliseconds = "0" + milliseconds;
+  let milliseconds = '' + dur.milliseconds();
+  if (milliseconds.length === 1) milliseconds = '0' + milliseconds;
   if (milliseconds.length > 2) milliseconds = milliseconds[0] + milliseconds[1];
 
   return `${minute}:${second}:${milliseconds}`;
@@ -972,5 +974,5 @@ export function updateRowHeight(num: number): Thunk<number> {
   return (dispatch, getState) => {
     dispatch({ type: UPDATE_ROW_HEIGHT, payload: num });
     updateUrlToReflectState(getState());
-  }
+  };
 }

@@ -1,4 +1,4 @@
-import { createReducer, notifications } from ".";
+import { createReducer, notifications } from '.';
 
 const initialState: StateBrowserCompatibility = {
   audioContext: false,
@@ -6,10 +6,10 @@ const initialState: StateBrowserCompatibility = {
   getUserMedia: false
 };
 
-const AUDIO_CONTEXT_EXISTS = "browserCompatibility::audioContextExists";
+const AUDIO_CONTEXT_EXISTS = 'browserCompatibility::audioContextExists';
 const AUDIO_RECORDING_NOT_POSSIBLE =
-  "browserCompatibility::audioRecordingNotPossible";
-const GET_USER_MEDIA_EXISTS = "browserCompatibility::getUserMedia";
+  'browserCompatibility::audioRecordingNotPossible';
+const GET_USER_MEDIA_EXISTS = 'browserCompatibility::getUserMedia';
 
 export default createReducer<StateBrowserCompatibility>(initialState, {
   [AUDIO_CONTEXT_EXISTS](state) {
@@ -42,38 +42,38 @@ export function getUserMediaError(
   error: string | { name: string }
 ): Thunk<any> {
   return dispatch => {
-    if (error === "NOT IMPLEMENTED") {
+    if (error === 'NOT IMPLEMENTED') {
       let message =
-        "Voice recording will not work with this browser. You will only be able to utilize the midi editor";
+        'Voice recording will not work with this browser. You will only be able to utilize the midi editor';
       return dispatch(
         notifications.addNotification({
           browserIssue: true,
           message,
-          type: "danger"
+          type: 'danger'
         })
       );
     }
 
-    const deniedPermissionErrors = ["PermissionDeniedError", "NotAllowedError"];
+    const deniedPermissionErrors = ['PermissionDeniedError', 'NotAllowedError'];
 
     if (
-      typeof error !== "string" &&
+      typeof error !== 'string' &&
       deniedPermissionErrors.includes(error.name)
     ) {
       dispatch(
         notifications.addNotification({
           message:
-            "We are unable to access your microphone. Is it possible that you denied permission? Try refreshing the browser and granting permission.",
-          type: "danger"
+            'We are unable to access your microphone. Is it possible that you denied permission? Try refreshing the browser and granting permission.',
+          type: 'danger'
         })
       );
-    } else if (typeof error !== "string") {
+    } else if (typeof error !== 'string') {
       // todo: INCLUDE ERROR MESSAGE SOMEWHO
       dispatch(
         notifications.addNotification({
           message:
-            "We are not sure what happened, but we cannot access your microphone. Could you please email this error message to use so we can figure out what went wrong?",
-          type: "danger"
+            'We are not sure what happened, but we cannot access your microphone. Could you please email this error message to use so we can figure out what went wrong?',
+          type: 'danger'
         })
       );
     }
@@ -92,13 +92,13 @@ export function checkCompatibility(): Thunk<any> {
 
     if (!audioContextExists) {
       let message: string =
-        "Unfortunately nothing in this app will work with the current version of your browser";
+        'Unfortunately nothing in this app will work with the current version of your browser';
 
       dispatch(
         notifications.addNotification({
           browserIssue: true,
           message,
-          type: "danger"
+          type: 'danger'
         })
       );
     }

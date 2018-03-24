@@ -1,9 +1,9 @@
-import * as React from "react";
-import { connect } from "react-redux";
-import "./MidiOverlay.css";
+import * as React from 'react';
+import { connect } from 'react-redux';
+import './MidiOverlay.css';
 
-import { audioControl } from "./../common/state";
-const Rnd = require("react-rnd").default;
+import { audioControl } from './../common/state';
+const Rnd = require('react-rnd').default;
 
 interface Props {
   width: number;
@@ -77,7 +77,7 @@ class MidiOverlay extends React.Component<Props, {}> {
       editMode
     } = this.props;
 
-    const editMidiNotesMode = editMode === "draw";
+    const editMidiNotesMode = editMode === 'draw';
 
     const midiDisplay = midi.map((beat, i) => {
       if (Array.isArray(beat)) {
@@ -88,12 +88,12 @@ class MidiOverlay extends React.Component<Props, {}> {
           <Rnd
             key={i}
             className="midi-item"
-            size={{ height: "100%", width: widthOfNote }}
+            size={{ height: '100%', width: widthOfNote }}
             position={{ x: leftPosition, y: 0 }}
             dragGrid={[widthOfOneBeatInPixels, 50]}
             resizeGrid={[widthOfOneBeatInPixels, 0]}
             disableDragging={!editMidiNotesMode}
-            resizeHandleClasses={{ right: "midi-item-drag-handle" }}
+            resizeHandleClasses={{ right: 'midi-item-drag-handle' }}
             enableResizing={editMidiNotesMode && resizingOptions}
             z={1}
             onDragStop={(_: any, d: { x: number; y: number }) => {

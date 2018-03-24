@@ -1,11 +1,11 @@
-import * as React from "react";
-import { connect } from "react-redux";
-import cn from "classnames";
-import { audioControl } from "./../../common/state";
-import { makeSection, makeButton } from "./util";
-import { Radio, Input } from "../";
+import * as React from 'react';
+import { connect } from 'react-redux';
+import cn from 'classnames';
+import { audioControl } from './../../common/state';
+import { makeSection, makeButton } from './util';
+import { Radio, Input } from '../';
 
-import "./QuickView.css";
+import './QuickView.css';
 
 interface Props {
   getRef: (ref: HTMLDivElement | null) => any;
@@ -41,9 +41,9 @@ export function QuickViewButton({
     ref: getQuickViewTrigger,
     onClick: toggleQuickView,
     active: quickviewOpen,
-    icon: "cog",
-    tooltip: "Change and edit various \n editor and musical settings",
-    id: "quick-view-button"
+    icon: 'cog',
+    tooltip: 'Change and edit various \n editor and musical settings',
+    id: 'quick-view-button'
   });
 }
 
@@ -89,9 +89,9 @@ class QuickView extends React.Component<Props, {}> {
           {makeSection(
             <p className="control" onClick={toggleMetronome}>
               <button
-                className={cn("button", {
-                  "is-dark": metronome,
-                  "is-outlined": !metronome
+                className={cn('button', {
+                  'is-dark': metronome,
+                  'is-outlined': !metronome
                 })}
               >
                 {metronome && <span>Turn Metronome Off</span>}
@@ -111,7 +111,7 @@ class QuickView extends React.Component<Props, {}> {
               disabled={isRecording}
               title="drag to adjust the row size"
             />,
-            "Adjust Note Heights"
+            'Adjust Note Heights'
           )}
 
           {makeSection(
@@ -119,9 +119,11 @@ class QuickView extends React.Component<Props, {}> {
               disabled={isRecording}
               values={midiPlaybackOptions}
               value={selectedMidiPlaybackOption}
-              onChange={updateMidiPlaybackOption}
+              onChange={value =>
+                updateMidiPlaybackOption(value as MidiPlaybackOption)
+              }
             />,
-            "Audio Playback Option"
+            'Audio Playback Option'
           )}
 
           {makeSection(
@@ -142,7 +144,7 @@ class QuickView extends React.Component<Props, {}> {
                 })()}
               </select>
             </div>,
-            "Tempo"
+            'Tempo'
           )}
 
           {makeSection(
@@ -159,7 +161,7 @@ class QuickView extends React.Component<Props, {}> {
                 <option>32</option>
               </select>
             </div>,
-            "Measures"
+            'Measures'
           )}
 
           {makeSection(
@@ -171,7 +173,7 @@ class QuickView extends React.Component<Props, {}> {
               value={midiPlaybackVolume}
               onChange={updateMidiPlaybackVolume}
             />,
-            "Midi Volume"
+            'Midi Volume'
           )}
 
           {/*makeSection(
@@ -185,7 +187,6 @@ class QuickView extends React.Component<Props, {}> {
             />,
             "Recording Volume"
           )*/}
-
         </div>
       </div>
     );
@@ -193,7 +194,7 @@ class QuickView extends React.Component<Props, {}> {
 }
 
 export default connect(
-  state => ({
+  (state: StateRoot) => ({
     metronome: audioControl.getIsMetronomeOn(state),
     rowHeight: audioControl.getRowHeight(state),
     isRecording: audioControl.getIsRecording(state),

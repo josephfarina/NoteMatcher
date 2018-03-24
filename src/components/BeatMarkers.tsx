@@ -1,9 +1,9 @@
-import * as React from "react";
-import { connect } from "react-redux";
-import { audioControl } from "./../common/state";
-import notes from "./../common/pitch/notes";
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { audioControl } from './../common/state';
+import notes from './../common/pitch/notes';
 
-import "./BeatMarkers.css";
+import './BeatMarkers.css';
 
 interface Props {
   getAllBeatXCoordinates: (width: number) => number[];

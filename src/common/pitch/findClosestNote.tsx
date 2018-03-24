@@ -1,4 +1,4 @@
-import notes from "./notes";
+import notes from './notes';
 
 export default function findClosestNote(freq: number) {
   // Use binary search to find the closest note

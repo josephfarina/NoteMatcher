@@ -1,15 +1,15 @@
-import * as React from "react";
-import { getStringifiedStateUrl } from "./../../common/state";
-const CopyToClipboard = require("react-copy-to-clipboard");
-import { connect } from "react-redux";
-import cn from "classnames";
-import { Dropdown } from "../";
-import { makeButton } from "./util";
+import * as React from 'react';
+import { getStringifiedStateUrl } from './../../common/state';
+const CopyToClipboard = require('react-copy-to-clipboard');
+import { connect } from 'react-redux';
+import cn from 'classnames';
+import { Dropdown } from '../';
+import { makeButton } from './util';
 //
 // todo: make programtic
 
 const CopyShareLink = connect(
-  state => ({
+  (state: StateRoot) => ({
     shareLink: getStringifiedStateUrl(state)
   }),
   () => ({})
@@ -42,12 +42,12 @@ const CopyShareLink = connect(
 
             <div className="control">
               <button
-                className={cn("button is-medium", {
-                  "is-primary": this.state.copied,
-                  "is-info": !this.state.copied
+                className={cn('button is-medium', {
+                  'is-primary': this.state.copied,
+                  'is-info': !this.state.copied
                 })}
               >
-                {this.state.copied ? "Copied" : "Copy"}
+                {this.state.copied ? 'Copied' : 'Copy'}
               </button>
             </div>
           </div>
@@ -66,14 +66,14 @@ export function ShareDropdown({  }: {}) {
       fullScreen
       right
       button={makeButton({
-        id: "share-or-ellipsis-button",
-        icon: "share"
+        id: 'share-or-ellipsis-button',
+        icon: 'share'
       })}
       content={
         <div className="dropdown-item content">
           <p>
-            {" "}
-            <strong>Shareable Link</strong>{" "}
+            {' '}
+            <strong>Shareable Link</strong>{' '}
           </p>
           <p>
             This link can be used to save your projects. It saves all the midi,
